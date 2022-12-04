@@ -1,7 +1,5 @@
 import pyperclip
 
-import os
-
 sqldata = """
 |         100 | Steven      | King        | SKING    | 515.123.4567       | 1987-06-17 | AD_PRES    | 24000.00 |           0.00 |          0 |   		  90 |
 |         101 | Neena       | Kochhar     | NKOCHHAR | 515.123.4568       | 1987-06-18 | AD_VP      | 17000.00 |           0.00 |        100 |            90 |
@@ -116,12 +114,13 @@ sqldata = """
 def extractor(data: str):
     # setting word count to go to the next line after certain number of words 
     word_count = 1
+    total_columns = 11
     output = "("
 
     for w in data.split("|"):
 
         # if the word count reaches the number of words in the line we move to the next entry
-        if word_count == 11:
+        if word_count == total_columns:
             output = f"{output[:-1]}),\n("
             word_count = 1
         else:
